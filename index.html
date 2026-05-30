@@ -3,209 +3,918 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#3A1A26">
 <title>American Nails Hair &amp; Beauty Salon — Park Street, Luton</title>
-<meta name="description" content="A neighbourhood nail, hair and beauty salon on Park Street, Luton — open since 2002. Gel, acrylic, pedicure, cuts, colour, brows, lashes and waxing.">
+<meta name="description" content="A neighbourhood hair, nails and beauty salon on Park Street in central Luton. Walk in or visit us.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,400;1,500;1,700&family=Jost:wght@300;400;500;600&display=swap">
+
+<style>
+/* ────────────────────────────────────────────────────────────────
+   American Nails Hair & Beauty Salon · Park Street, Luton
+   Type:  Cormorant Garamond (italic display) + Jost (geometric body)
+   Mood:  refined-feminine, oxblood-grounded, no glitz
+   ──────────────────────────────────────────────────────────────── */
+
+:root {
+  --rose:        #B85A8E;
+  --rose-deep:   #7E2E59;
+  --blush:       #F5E8EF;
+  --blush-warm:  #EBD2DE;
+  --paper:       #FBF6F2;
+  --plum:        #3A1A26;
+  --ink:         #1F1218;
+  --rule:        rgba(31, 18, 24, .14);
+
+  --display: "Cormorant Garamond", "Times New Roman", serif;
+  --body:    "Jost", system-ui, sans-serif;
+
+  --gutter:  clamp(1.25rem, 2.4vw + .4rem, 2.75rem);
+  --section: clamp(4.5rem, 7vw + 2rem, 9rem);
+  --measure: 38rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--blush);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: clamp(0.98rem, 0.78rem + 0.45vw, 1.08rem);
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Faint paper grain — kills the digital flatness */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: .06;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(rgba(58,26,38,.6) 1px, transparent 1px),
+    radial-gradient(rgba(58,26,38,.4) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 500;
+  margin: 0;
+  text-wrap: balance;
+  letter-spacing: -0.01em;
+  color: var(--plum);
+}
+
+p { margin: 0; text-wrap: pretty; hyphens: auto; }
+
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--plum); color: var(--blush); }
+
+.italic { font-style: italic; font-weight: 500; }
+
+/* ────── header ────── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem var(--gutter);
+  background: rgba(245, 232, 239, .82);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.mark {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, .9vw + .9rem, 1.45rem);
+  letter-spacing: -.005em;
+  color: var(--plum);
+  display: inline-flex;
+  align-items: baseline;
+  gap: .25em;
+}
+.mark em { font-style: italic; color: var(--rose-deep); }
+
+nav.primary {
+  display: flex;
+  gap: clamp(1rem, 2vw, 2.2rem);
+  align-items: baseline;
+  font-size: .82rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+nav.primary a {
+  position: relative;
+  color: var(--ink);
+  padding-bottom: .2rem;
+}
+nav.primary a::after {
+  content: "";
+  position: absolute; left: 0; right: 100%;
+  bottom: 0; height: 1px;
+  background: var(--rose-deep);
+  transition: right .35s cubic-bezier(.2,.7,.2,1);
+}
+nav.primary a:hover::after,
+nav.primary a:focus-visible::after { right: 0; }
+
+.nav-toggle, .nav-burger { display: none; }
+
+/* ────── hero ────── */
+.hero {
+  padding: clamp(2.5rem, 4vw + 1rem, 5rem) var(--gutter) var(--section);
+  position: relative;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 4rem);
+  align-items: end;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: clamp(3.4rem, 13vw, 11.5rem);
+  line-height: .88;
+  letter-spacing: -.035em;
+  font-weight: 500;
+  color: var(--plum);
+}
+.hero h1 .row-1 { display: block; }
+.hero h1 .row-2 {
+  display: block;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--rose-deep);
+  margin-left: clamp(.5rem, 2vw, 2.5rem);
+}
+.hero h1 .row-3 {
+  display: block;
+  font-size: clamp(1rem, 1.4vw + .6rem, 1.55rem);
+  font-family: var(--body);
+  font-weight: 400;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-top: clamp(1rem, 2vw, 1.75rem);
+}
+
+.hero__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 26rem;
+  padding-bottom: .6rem;
+}
+.hero__aside p {
+  font-size: clamp(1rem, .9vw + .7rem, 1.15rem);
+  line-height: 1.55;
+  color: var(--ink);
+}
+.hero__aside .meta {
+  font-size: .78rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+  border-top: 1px solid var(--rule);
+  padding-top: 1rem;
+}
+.hero__cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .85rem 1.3rem;
+  background: var(--plum);
+  color: var(--blush);
+  font-family: var(--body);
+  font-size: .82rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  border: 1px solid var(--plum);
+  border-radius: 999px;
+  transition: background .25s, color .25s, transform .25s;
+}
+.hero__cta:hover, .hero__cta:focus-visible {
+  background: var(--rose-deep);
+  border-color: var(--rose-deep);
+  transform: translateY(-1px);
+}
+.hero__cta::after { content: "→"; transition: transform .25s; }
+.hero__cta:hover::after { transform: translateX(3px); }
+
+/* ────── marquee strip ────── */
+.marquee {
+  background: var(--plum);
+  color: var(--blush);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  overflow: hidden;
+  padding: 1.2rem 0;
+}
+.marquee__track {
+  display: flex;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: scroll 38s linear infinite;
+  width: max-content;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.4vw + .5rem, 2.2rem);
+  letter-spacing: -.005em;
+}
+.marquee__track span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3rem;
+}
+.marquee__track span::after {
+  content: "✦";
+  font-style: normal;
+  font-size: .8em;
+  color: var(--rose);
+  margin-left: 3rem;
+}
+@keyframes scroll {
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+}
+
+/* ────── section shell ────── */
+section.slab {
+  padding: var(--section) var(--gutter);
+  border-top: 1px solid var(--rule);
+}
+section.slab.paper { background: var(--paper); }
+section.slab.deep {
+  background: var(--plum);
+  color: var(--blush);
+  border-top: none;
+}
+section.slab.deep h2 { color: var(--blush); }
+section.slab.deep .eyebrow { color: var(--rose); }
+
+.slab__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--body);
+  font-size: .76rem;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+  margin-bottom: 1.5rem;
+}
+
+h2.section-title {
+  font-size: clamp(2.2rem, 4.5vw + .5rem, 4.4rem);
+  line-height: 1;
+  letter-spacing: -.025em;
+  font-weight: 500;
+  max-width: 22ch;
+}
+h2.section-title em { color: var(--rose-deep); }
+
+/* ────── about ────── */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 4.5rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+@media (min-width: 800px) {
+  .about__grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+.about__copy p + p { margin-top: 1.15em; }
+.about__copy p {
+  font-size: clamp(1.05rem, .8vw + .75rem, 1.22rem);
+  line-height: 1.6;
+  max-width: 36rem;
+}
+.about__copy .lede {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.5rem, 1.5vw + 1rem, 2.1rem);
+  line-height: 1.25;
+  color: var(--plum);
+  margin-bottom: 1.4em;
+}
+
+.about__pull {
+  align-self: start;
+  border-left: 1px solid var(--rose);
+  padding: .25rem 0 .25rem 1.5rem;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.15rem, 1vw + .8rem, 1.45rem);
+  line-height: 1.4;
+  color: var(--plum);
+}
+.about__pull cite {
+  display: block;
+  margin-top: 1rem;
+  font-family: var(--body);
+  font-style: normal;
+  font-size: .78rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+}
+
+/* ────── services ────── */
+.services__intro {
+  max-width: 32rem;
+  margin: 1.5rem 0 clamp(2.5rem, 4vw, 4rem);
+  font-size: clamp(1rem, .7vw + .8rem, 1.15rem);
+  color: var(--blush-warm);
+}
+section.slab.deep .services__intro { color: var(--blush-warm); }
+
+.services {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 4vw, 4.5rem);
+}
+@media (min-width: 750px) {
+  .services { grid-template-columns: repeat(3, 1fr); }
+}
+
+.service h3 {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.85rem, 2vw + 1rem, 2.6rem);
+  font-weight: 500;
+  color: var(--rose);
+  letter-spacing: -.005em;
+  border-bottom: 1px solid rgba(245, 232, 239, .25);
+  padding-bottom: .7rem;
+  margin-bottom: 1.25rem;
+}
+.service ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+.service li {
+  font-family: var(--body);
+  font-size: .98rem;
+  letter-spacing: .015em;
+  line-height: 1.45;
+  color: var(--blush);
+  display: flex;
+  align-items: baseline;
+  gap: .7rem;
+}
+.service li::before {
+  content: "—";
+  color: var(--rose);
+  flex-shrink: 0;
+}
+.service__note {
+  margin-top: 1.5rem;
+  font-size: .8rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--blush-warm);
+  opacity: .75;
+}
+
+/* ────── gallery ────── */
+.gallery__intro {
+  max-width: 28rem;
+  margin: 1.25rem 0 clamp(2rem, 3vw, 3rem);
+  font-size: clamp(1rem, .7vw + .8rem, 1.12rem);
+}
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(.6rem, 1.2vw, 1.2rem);
+}
+@media (min-width: 700px) {
+  .gallery__grid { grid-template-columns: repeat(4, 1fr); }
+}
+.tile {
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+.tile:nth-child(1) {
+  background:
+    radial-gradient(80% 60% at 30% 30%, var(--blush-warm), transparent 65%),
+    linear-gradient(135deg, var(--paper), var(--blush));
+}
+.tile:nth-child(2) {
+  background:
+    radial-gradient(70% 70% at 70% 40%, var(--rose), transparent 60%),
+    linear-gradient(150deg, var(--blush-warm), var(--blush));
+}
+.tile:nth-child(3) {
+  background:
+    radial-gradient(60% 80% at 50% 80%, var(--plum), transparent 65%),
+    linear-gradient(160deg, var(--blush), var(--blush-warm));
+}
+.tile:nth-child(4) {
+  background:
+    radial-gradient(60% 60% at 30% 60%, var(--rose-deep), transparent 60%),
+    linear-gradient(120deg, var(--paper), var(--blush-warm));
+}
+.tile:nth-child(5) {
+  background:
+    radial-gradient(70% 50% at 60% 30%, var(--rose), transparent 65%),
+    linear-gradient(160deg, var(--blush), var(--paper));
+}
+.tile:nth-child(6) {
+  background:
+    radial-gradient(80% 70% at 50% 50%, var(--blush-warm), transparent 60%),
+    linear-gradient(135deg, var(--plum), var(--rose-deep));
+  color: var(--blush);
+}
+.tile:nth-child(7) {
+  background:
+    radial-gradient(60% 60% at 30% 30%, var(--rose-deep), transparent 60%),
+    linear-gradient(140deg, var(--blush-warm), var(--blush));
+}
+.tile:nth-child(8) {
+  background:
+    radial-gradient(70% 60% at 70% 70%, var(--rose), transparent 65%),
+    linear-gradient(140deg, var(--paper), var(--blush));
+}
+
+.tile__label {
+  position: relative;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1rem, .7vw + .7rem, 1.25rem);
+  color: var(--plum);
+  letter-spacing: -.005em;
+  z-index: 1;
+}
+.tile:nth-child(6) .tile__label { color: var(--blush); }
+
+.gallery__caption {
+  margin-top: clamp(2rem, 3vw, 3rem);
+  font-size: .78rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+}
+
+/* ────── contact ────── */
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  margin-top: clamp(2rem, 3vw, 3rem);
+}
+@media (min-width: 850px) {
+  .contact__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: start;
+  }
+}
+
+.address {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 1.6vw + 1rem, 2.4rem);
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--plum);
+}
+.address em { color: var(--rose-deep); font-weight: 500; }
+.address__small {
+  margin-top: 1.25rem;
+  font-family: var(--body);
+  font-size: .82rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.contact__list {
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+  font-size: .98rem;
+}
+.contact__list li {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  border-bottom: 1px dotted var(--rule);
+  padding-bottom: .7rem;
+}
+.contact__list dt {
+  font-size: .75rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+}
+.contact__list dd { margin: 0; }
+
+.map {
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--plum);
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+.map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: saturate(.85) contrast(1.02);
+}
+
+/* ────── footer ────── */
+footer.letterhead {
+  background: var(--ink);
+  color: var(--blush-warm);
+  padding: clamp(3rem, 5vw, 5rem) var(--gutter) 2.5rem;
+}
+.letterhead__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 700px) {
+  .letterhead__inner {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+.letterhead h3 {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(2rem, 3vw + 1rem, 3.4rem);
+  font-weight: 500;
+  color: var(--blush);
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  margin-bottom: 1.2rem;
+}
+.letterhead p, .letterhead a {
+  font-size: .92rem;
+  line-height: 1.55;
+  color: var(--blush-warm);
+}
+.letterhead h4 {
+  font-family: var(--body);
+  font-size: .76rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: .75rem;
+  font-weight: 500;
+}
+.letterhead nav { display: flex; flex-direction: column; gap: .45rem; }
+.letterhead nav a:hover { color: var(--rose); }
+.letterhead .colophon {
+  grid-column: 1 / -1;
+  border-top: 1px solid rgba(245, 232, 239, .12);
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  justify-content: space-between;
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--blush-warm);
+  opacity: .7;
+}
+
+/* ────── scroll-driven reveals ────── */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 25%;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(2.2rem); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ────── mobile nav ────── */
+@media (max-width: 720px) {
+  nav.primary { display: none; }
+  .nav-burger {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-family: var(--body);
+    font-size: .8rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--plum);
+    cursor: pointer;
+    padding: .35rem .8rem;
+    border: 1px solid var(--plum);
+    border-radius: 999px;
+  }
+  .nav-toggle:checked ~ .mobile-nav { display: flex; }
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    gap: .35rem;
+    padding: .6rem var(--gutter) 1.5rem;
+    background: var(--blush);
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--body);
+    font-size: .98rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .mobile-nav a {
+    padding: .85rem 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--plum);
+  }
+  .mobile-nav a:last-child { border-bottom: 0; }
+
+  .hero__grid {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .hero__aside { padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+  .contact__list li { grid-template-columns: 7rem 1fr; }
+}
+
+@media (max-width: 480px) {
+  .gallery__grid { grid-template-columns: 1fr 1fr; }
+  .contact__list li {
+    grid-template-columns: 1fr;
+    gap: .2rem;
+  }
+}
+
+/* mobile nav is checkbox-driven; hide checkbox visually */
+.nav-toggle { position: absolute; opacity: 0; pointer-events: none; }
+</style>
 </head>
+
 <body>
 
 <header class="topbar">
-  <a href="index.html" class="mark">American <em>Nails</em></a>
-  <nav aria-label="primary">
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="contact.html">Visit</a>
-    <a class="call" href="tel:+441582455900">01582 455900</a>
+  <a href="#home" class="mark">American <em>Nails</em></a>
+  <nav class="primary" aria-label="Primary">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Visit</a>
   </nav>
-  <label for="nav-toggle" class="nav-burger" aria-label="Menu">Menu</label>
+  <label for="nav-toggle" class="nav-burger" aria-label="Open menu">Menu</label>
 </header>
 <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true">
-<div class="mobile-nav" aria-label="mobile">
-  <a href="about.html">About</a>
-  <a href="services.html">Services</a>
-  <a href="gallery.html">Gallery</a>
-  <a href="contact.html">Visit</a>
-  <a class="phone" href="tel:+441582455900">Call · 01582 455900</a>
+<div class="mobile-nav" aria-label="Mobile">
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#contact">Visit</a>
 </div>
 
-<section id="top" class="hero">
+<!-- ───────────── HOME ───────────── -->
+<section id="home" class="hero">
   <div class="hero__grid">
     <h1>
-      American
-      <span class="italic">Nails.</span>
-      <span class="small-row">Hair &nbsp;·&nbsp; Beauty &nbsp;·&nbsp; Luton &nbsp;·&nbsp; Est. 2002</span>
+      <span class="row-1">American</span>
+      <span class="row-2">Nails.</span>
+      <span class="row-3">Hair &amp; Beauty Salon · Luton</span>
     </h1>
     <aside class="hero__aside">
-      <p>A nail, hair and beauty salon on Park Street, Luton — open and busy on this same corner for more than twenty years. Walk in for a tidy gel; stay for the chair, the chatter, the proper finish.</p>
-      <div class="meta">Walk-ins welcome · Mon — Sat</div>
+      <p>A neighbourhood hair, nails and beauty room on Park Street, in the heart of Luton — quiet, careful work in a small, unfussy space.</p>
+      <div class="meta">Walk in · Park Street, Luton</div>
+      <a href="#contact" class="hero__cta">Find Us</a>
     </aside>
   </div>
 </section>
 
-<section class="marquee" aria-hidden="true">
+<!-- marquee strip -->
+<div class="marquee" aria-hidden="true">
   <div class="marquee__track">
-    <span>Gel manicure</span><span class="dot">✶</span>
-    <span>Acrylic extensions</span><span class="dot">✶</span>
-    <span>Dip powder</span><span class="dot">✶</span>
-    <span>Pedicure</span><span class="dot">✶</span>
-    <span>Cut &amp; blow-dry</span><span class="dot">✶</span>
-    <span>Colour</span><span class="dot">✶</span>
-    <span>Threading</span><span class="dot">✶</span>
-    <span>Waxing</span><span class="dot">✶</span>
-    <span>Lashes</span><span class="dot">✶</span>
-    <span>Brows</span><span class="dot">✶</span>
-    <span>Gel manicure</span><span class="dot">✶</span>
-    <span>Acrylic extensions</span><span class="dot">✶</span>
-    <span>Dip powder</span><span class="dot">✶</span>
-    <span>Pedicure</span><span class="dot">✶</span>
-    <span>Cut &amp; blow-dry</span><span class="dot">✶</span>
-    <span>Colour</span><span class="dot">✶</span>
-    <span>Threading</span><span class="dot">✶</span>
-    <span>Waxing</span><span class="dot">✶</span>
-    <span>Lashes</span><span class="dot">✶</span>
-    <span>Brows</span><span class="dot">✶</span>
+    <span>Hair</span><span>Nails</span><span>Beauty</span><span>Brows &amp; Lashes</span><span>Park Street, Luton</span><span>Walk-ins welcome</span>
+    <span>Hair</span><span>Nails</span><span>Beauty</span><span>Brows &amp; Lashes</span><span>Park Street, Luton</span><span>Walk-ins welcome</span>
   </div>
-</section>
+</div>
 
-<section class="slab slab--cream about">
-  <div class="container about__grid">
-    <div class="reveal">
-      <div class="eyebrow">A salon on Park Street</div>
-      <h2>A quiet hour<br>in the middle<br>of town.</h2>
-    </div>
-    <div class="about__body reveal">
-      <p>American Nails has been a small nails, hair and beauty salon in the centre of Luton since 2002. The kind of place you nip into on a Saturday morning for a fresh set, or settle into on a Thursday evening for colour, conversation and a proper finish.</p>
-      <p>Our work is unfussy and careful. We take time over a cuticle the way other people take time over a haircut — whether you want a clean polished set for the week ahead, a sharp acrylic full-set for an occasion, or just a half-hour off your feet.</p>
-      <p>Walk-ins are welcome whenever the door is open. For colour and longer appointments, please ring ahead or drop in during the week to book.</p>
-      <div class="cta-row">
-        <a class="btn btn--rose" href="services.html">See the services <span class="arrow">→</span></a>
-        <a class="btn" href="tel:+441582455900">Call 01582 455900</a>
+<!-- ───────────── ABOUT ───────────── -->
+<section id="about" class="slab paper">
+  <div class="slab__inner">
+    <p class="eyebrow reveal">About the salon</p>
+    <h2 class="section-title reveal">A small <em>Luton</em> salon for the regulars and the in-betweens.</h2>
+    <div class="about__grid">
+      <div class="about__copy">
+        <p class="lede reveal">Tucked onto Park Street, between the shops and the bus stops, we are a hair-and-nails room rather than a flashy chain.</p>
+        <p class="reveal">The space is small on purpose. One conversation at a time, one set of hands at a time, and a proper unhurried finish on whatever you came in for — a tidy gel, a fresh cut, brows that sit straight again.</p>
+        <p class="reveal">Most of our work comes from people who live and work within ten minutes of the front door. Lunch-break manicures. Friday-afternoon colour. The mum who pops in with the toddler. The wedding-week panic. We try to make all of those feel the same: looked-after, not rushed.</p>
+        <p class="reveal">If you are new to us, the easiest thing is to walk in. We will tell you honestly what we can do today and what would be better booked for another day.</p>
       </div>
+      <aside class="about__pull reveal">
+        Small room. Steady hands. A long list of regulars, and always room for one more.
+        <cite>The house style</cite>
+      </aside>
     </div>
   </div>
 </section>
 
-<section class="slab slab--blush">
-  <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">What's on offer</div>
-      <h2 style="font-size: clamp(2.4rem, 5vw, 4.2rem); font-style: italic; font-weight: 400; line-height: 1;">
-        Three trades,<br>one shop floor.
-      </h2>
-    </div>
+<!-- ───────────── SERVICES ───────────── -->
+<section id="services" class="slab deep">
+  <div class="slab__inner">
+    <p class="eyebrow reveal">What we do</p>
+    <h2 class="section-title reveal">Three rooms, three trades, one front door.</h2>
+    <p class="services__intro reveal">Prices vary by length, condition and time in the chair. We will quote you honestly when you walk in or call ahead — no surprises at the till.</p>
 
-    <div class="menu">
-      <div class="menu__col reveal">
-        <h3>Nails</h3>
-        <ul>
-          <li>Gel manicure</li>
-          <li>Acrylic full set</li>
-          <li>Dip powder</li>
-          <li>Builder gel overlay</li>
-          <li>Pedicure</li>
-          <li>Nail art &amp; chrome</li>
-        </ul>
-      </div>
-      <div class="menu__col reveal">
+    <div class="services">
+      <div class="service reveal">
         <h3>Hair</h3>
         <ul>
           <li>Cut &amp; blow-dry</li>
-          <li>Full head colour</li>
-          <li>Highlights &amp; foils</li>
-          <li>Toner &amp; gloss</li>
-          <li>Perm &amp; straightening</li>
-          <li>Bridal &amp; occasion</li>
+          <li>Restyle</li>
+          <li>Root colour &amp; refresh</li>
+          <li>Highlights &amp; balayage</li>
+          <li>Toners &amp; gloss</li>
+          <li>Conditioning treatments</li>
+          <li>Wash &amp; finish</li>
+          <li>Children's cuts</li>
         </ul>
+        <div class="service__note">Bring a reference photo</div>
       </div>
-      <div class="menu__col reveal">
+
+      <div class="service reveal">
+        <h3>Nails</h3>
+        <ul>
+          <li>File &amp; polish</li>
+          <li>Gel manicure</li>
+          <li>Acrylic full set</li>
+          <li>Acrylic infill</li>
+          <li>Builder gel</li>
+          <li>Nail art &amp; designs</li>
+          <li>Gel pedicure</li>
+          <li>Soak-off &amp; tidy</li>
+        </ul>
+        <div class="service__note">Walk-ins for short services</div>
+      </div>
+
+      <div class="service reveal">
         <h3>Beauty</h3>
         <ul>
-          <li>Eyebrow threading</li>
           <li>Brow shape &amp; tint</li>
+          <li>Eyelash tint</li>
           <li>Lash lift</li>
           <li>Classic lash extensions</li>
+          <li>Threading</li>
           <li>Waxing</li>
           <li>Facials</li>
+          <li>Special-occasion finish</li>
         </ul>
+        <div class="service__note">Patch test 48h before tinting</div>
       </div>
-    </div>
-
-    <div class="services__foot">
-      <em>Walk in to see today's prices — they're posted at the front of the salon, the way they have been for twenty-odd years.</em>
-      <a href="services.html">Full list of services →</a>
     </div>
   </div>
 </section>
 
-<section class="slab slab--blush-deep visit">
-  <div class="container visit__grid">
-    <div class="reveal">
-      <div class="eyebrow">Visit</div>
-      <h2>Find us on<br>Park Street.</h2>
-      <address>
-        <span>American Nails Hair &amp; Beauty Salon</span>
-        <span>20 Park Street</span>
-        <span>Luton, LU1 3EP</span>
-      </address>
-      <dl class="visit__meta">
-        <div>
-          <dt>Telephone</dt>
-          <dd><a href="tel:+441582455900">01582 455900</a></dd>
-        </div>
-        <div>
-          <dt>Hours</dt>
-          <dd>Mon – Fri · 9.00 – 18.30<br>Saturday · 9.00 – 18.00<br><span style="color: var(--rose-deep); font-style: italic;">Sunday · closed</span></dd>
-        </div>
-        <div>
-          <dt>To book</dt>
-          <dd>Walk-ins welcome through the day. For colour or longer appointments, ring ahead.</dd>
-        </div>
-      </dl>
+<!-- ───────────── GALLERY ───────────── -->
+<section id="gallery" class="slab">
+  <div class="slab__inner">
+    <p class="eyebrow reveal">Gallery</p>
+    <h2 class="section-title reveal">Work from the chair — <em>photos coming soon.</em></h2>
+    <p class="gallery__intro reveal">We are putting together a small set of recent finishes — gel sets, brow shapes, balayage. Until then, this space is intentionally quiet. Come in and see the real thing on Park Street.</p>
+
+    <div class="gallery__grid reveal">
+      <div class="tile"><span class="tile__label">Gel · soft pink</span></div>
+      <div class="tile"><span class="tile__label">Balayage</span></div>
+      <div class="tile"><span class="tile__label">Brow shape</span></div>
+      <div class="tile"><span class="tile__label">Acrylic set</span></div>
+      <div class="tile"><span class="tile__label">Lash lift</span></div>
+      <div class="tile"><span class="tile__label">Root colour</span></div>
+      <div class="tile"><span class="tile__label">Nail art</span></div>
+      <div class="tile"><span class="tile__label">Cut &amp; finish</span></div>
     </div>
 
-    <div class="reveal">
-      <iframe
-        class="map-frame"
-        title="Map showing American Nails at 20 Park Street, Luton LU1 3EP"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=-0.4176797%2C51.8728022%2C-0.4076797%2C51.8828022&amp;layer=mapnik&amp;marker=51.8778022%2C-0.4126797"></iframe>
-      <p style="margin-top: 0.75rem; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose-deep);">
-        <a href="https://www.openstreetmap.org/?mlat=51.8778022&amp;mlon=-0.4126797#map=18/51.8778022/-0.4126797" target="_blank" rel="noopener">Open in maps →</a>
-      </p>
+    <p class="gallery__caption reveal">Photo set arriving · Spring / Summer</p>
+  </div>
+</section>
+
+<!-- ───────────── CONTACT ───────────── -->
+<section id="contact" class="slab paper">
+  <div class="slab__inner">
+    <p class="eyebrow reveal">Visit us</p>
+    <h2 class="section-title reveal">Park Street, central <em>Luton</em>.</h2>
+
+    <div class="contact__grid">
+      <div class="reveal">
+        <p class="address">
+          American Nails<br>
+          <em>Hair &amp; Beauty Salon</em><br>
+          Park Street<br>
+          Luton, LU1 3
+        </p>
+        <p class="address__small">South Ward · Bedfordshire</p>
+
+        <dl class="contact__list">
+          <li>
+            <dt>Walk in</dt>
+            <dd>Step in any time during opening — for short services we will usually fit you in.</dd>
+          </li>
+          <li>
+            <dt>Bookings</dt>
+            <dd>Longer hair appointments and lash extensions are best pre-booked in person on a previous visit.</dd>
+          </li>
+          <li>
+            <dt>Find us</dt>
+            <dd>Park Street runs south from the centre of town. The salon sits among the small shops on the eastern side.</dd>
+          </li>
+          <li>
+            <dt>Buses</dt>
+            <dd>Several routes stop within a few minutes' walk on Park Street and Castle Street.</dd>
+          </li>
+        </dl>
+      </div>
+
+      <div class="map reveal">
+        <iframe
+          title="Map showing American Nails Hair &amp; Beauty Salon on Park Street, Luton"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-0.4176797,51.8748022,-0.4076797,51.8808022&amp;layer=mapnik&amp;marker=51.8778022,-0.4126797"
+          allowfullscreen></iframe>
+      </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <div class="foot__grid">
-      <div>
-        <p class="foot__title">American <em>Nails</em><br>Hair &amp; Beauty.</p>
-        <p style="margin-top: 1rem; color: rgba(245,232,239,0.65); font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;">Park Street, Luton · since 2002</p>
-      </div>
-      <div class="foot__col">
-        <h4>Find us</h4>
-        <p>20 Park Street<br>Luton<br>LU1 3EP</p>
-        <p style="margin-top: 0.75rem;"><a href="https://www.openstreetmap.org/?mlat=51.8778022&amp;mlon=-0.4126797#map=18/51.8778022/-0.4126797" target="_blank" rel="noopener">Open in maps</a></p>
-      </div>
-      <div class="foot__col">
-        <h4>Call us</h4>
-        <p><a href="tel:+441582455900">01582 455900</a></p>
-        <p style="margin-top: 0.75rem;">Walk-ins welcome</p>
-      </div>
-      <div class="foot__col">
-        <h4>Hours</h4>
-        <p>Mon — Fri · 9.00 – 18.30<br>Saturday · 9.00 – 18.00<br>Sunday · closed</p>
-      </div>
+<!-- ───────────── FOOTER ───────────── -->
+<footer class="letterhead">
+  <div class="letterhead__inner">
+    <div>
+      <h3>American <em class="italic">Nails</em><br>Hair &amp; Beauty.</h3>
+      <p>Park Street<br>Luton, LU1 3<br>Bedfordshire</p>
     </div>
-    <div class="foot__rule">
-      <span>© American Nails Hair &amp; Beauty Salon · 20 Park Street, Luton</span>
-      <span>Established 2002</span>
+    <div>
+      <h4>Visit</h4>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Find us</a>
+      </nav>
+    </div>
+    <div>
+      <h4>The salon</h4>
+      <p>Small hair, nails and beauty room on Park Street — independent, walk-in friendly, looking after Luton regulars.</p>
+    </div>
+    <div class="colophon">
+      <span>© American Nails Hair &amp; Beauty Salon, Luton</span>
+      <span>Park Street · LU1 3</span>
     </div>
   </div>
 </footer>
